@@ -4,6 +4,8 @@ A C# library for chunking POS-tagged text such as that output by the Stanford PO
 
 ##Example usage:
 
+```
+
 string taggedText = "The/DT professor/NN walked/VBD the/DT dog/NN in/IN the/DT park/NN ./. The/DT dog/NN chased/VBD a/DT big/JJ stick/NN ./.";
 
 var rules = new List<Rule>
@@ -15,6 +17,8 @@ var rules = new List<Rule>
 };
 
 string chunkedText = new Chunker().Chunk(taggedText, rules);
+
+```
 
 The chunked output will be:
 
@@ -36,6 +40,8 @@ Any brackets in the original text are expected to have been escaped by the previ
 ##Chunk parser
 
 Also included is a parser which takes the chunked output and produces a tree structure for easier analysis of the sentence(s). An example from the unit tests:
+
+```
 
 string chunkedText = "[DC [NP The/DT professor/NN] [VP walked/VBD [NP the/DT dog/NN]]]";
 var rootBranch = new Parser().Parse(chunkedText);
@@ -67,6 +73,8 @@ Assert.IsNotNull(professorTagBranch);
 Assert.AreEqual("professor", professorTagBranch.Word);
 Assert.AreEqual("NN", professorTagBranch.Tag);
 Assert.IsNull(professorTagBranch.Children);
+
+```
 
 
 ##Inspiration
