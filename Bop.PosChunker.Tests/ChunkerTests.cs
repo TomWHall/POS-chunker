@@ -90,7 +90,8 @@ namespace Bop.PosChunker.Tests
             Assert.AreEqual("[FS Faster/JJR] and/CC [FS faster/JJR] he/PRP went/VBD", chunkedText);
         }
 
-        [Test] public void Chunk_GivenRuleWithOptionalChunk_CapturesWithAndWithoutOptionalChunk()
+        [Test]
+        public void Chunk_GivenRuleWithOptionalChunk_CapturesWithAndWithoutOptionalChunk()
         {
             string taggedText = "[A Arnold] [B barrel] [B Bill] [A apple] [A Adam] [A Africa] [B Bob]";
 
