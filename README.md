@@ -27,9 +27,13 @@ The chunked output will be:
 Each Rule defines a Regex pattern. Additionally, some shortcut patterns are allowed which are transformed into Regexes before application:
 
 To capture an existing chunk: {CHUNKNAME}
+
 To optionally capture an existing chunk: {CHUNKNAME}*
+
 To capture a tagged word regardless of the tag: {word/*}
+
 To capture a tagged word regardless of the word: {*/TAG}
+
 To capture multiple consecutive tagged words: {*/(TAG1|TAG2|TAG3)}+
 
 For example, "{NP} {VP}" above translates to "a noun phrase (NP) chunk followed by a verb phrase (VP) chunk" and this outputs a Declarative Clause chunk (DC).
