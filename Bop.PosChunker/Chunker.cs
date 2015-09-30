@@ -11,13 +11,14 @@ namespace Bop.PosChunker
     {
         // String format for a recursive Regex pattern to match the chunk with name {0}
         private const string ChunkTemplate = @"(\[{0}\s+(?>[^\[\]]+|\[(?<DEPTH>)|\](?<-DEPTH>))*(?(DEPTH)(?!))\]){1}";
+        private const string TagAbbreviation = "{([^{}]+?)/([^{}]+?)}";
 
-        private readonly Regex tagAbbreviationRegex = new Regex(@"{(.+?)/(.+?)}", RegexOptions.Compiled);
-        private readonly Regex multiTagAbbreviationRegex = new Regex(@"{(.+?)/(.+?)}\+", RegexOptions.Compiled);
+        private readonly Regex tagAbbreviationRegex = new Regex(TagAbbreviation);
+        private readonly Regex multiTagAbbreviationRegex = new Regex(TagAbbreviation + @"\+");
 
-        private readonly Regex chunkAbbreviationRegex = new Regex(@"{(\w+?)}(\*)?", RegexOptions.Compiled);
+        private readonly Regex chunkAbbreviationRegex = new Regex(@"{(\w+?)}(\*)?");
 
-        private readonly Regex spaceAbbreviationRegex = new Regex(@"\s+", RegexOptions.Compiled);
+        private readonly Regex spaceAbbreviationRegex = new Regex(@"\s+");
 
         /// <summary>
         /// Returns the result of applying the supplied chunking rules to the supplied text

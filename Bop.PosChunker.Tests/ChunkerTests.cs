@@ -77,6 +77,20 @@ namespace Bop.PosChunker.Tests
         }
 
         [Test]
+        public void Chunk_GivenRuleWithConsecutiveTags_CapturesConsecutiveTags()
+        {
+            string taggedText = "The/DT old/JJ friendly/JJ science/NN professor/NN";
+
+            var rules = new List<Rule>
+            {
+                new Rule { ChunkName = "NP", Pattern = @"{*/(DT|JJ|NNPS|NNP|NNS|NN|PRP|CD)}+" }
+            };
+
+            string chunkedText = new Chunker().Chunk(taggedText, rules);
+            Assert.AreEqual("[NP The/DT old/JJ friendly/JJ science/NN professor/NN]", chunkedText);
+        }
+
+        [Test]
         public void Chunk_GivenRuleWithRegexOptions_AppliesRegexOptions()
         {
             string taggedText = "Faster/JJR and/CC faster/JJR he/PRP went/VBD";
@@ -102,6 +116,34 @@ namespace Bop.PosChunker.Tests
 
             string chunkedText = new Chunker().Chunk(taggedText, rules);
             Assert.AreEqual("[ABB [A Arnold] [B barrel] [B Bill]] [A apple] [A Adam] [ABB [A Africa] [B Bob]]", chunkedText);
+        }
+
+        [Test]
+        public void Chunk_GivenRuleWithConsecutiveChunks_CapturesConsecutiveChunks()
+        {
+            string taggedText = "[NP I/NN] [VP ate/VBD [NP cake/NN]]";
+
+            var rules = new List<Rule>
+            {
+                new Rule { ChunkName = "DC", Pattern = @"{NP} {VP}" }
+            };
+
+            string chunkedText = new Chunker().Chunk(taggedText, rules);
+            Assert.AreEqual("[DC [NP I/NN] [VP ate/VBD [NP cake/NN]]]", chunkedText);
+        }
+
+        [Test]
+        public void Chunk_GivenRuleWithConsecutiveChunks_DoesNotCapturesNestedChunks()
+        {
+            string taggedText = "[NP I/NN] [FOOD [VP ate/VBD [NP cake/NN]]]";
+
+            var rules = new List<Rule>
+            {
+                new Rule { ChunkName = "DC", Pattern = @"{NP} {VP}" }
+            };
+
+            string chunkedText = new Chunker().Chunk(taggedText, rules);
+            Assert.AreEqual("[NP I/NN] [FOOD [VP ate/VBD [NP cake/NN]]]", chunkedText);
         }
 
         private List<Rule> GetChunkRules()

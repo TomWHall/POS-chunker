@@ -11,7 +11,7 @@ namespace Bop.PosChunker.ChunkParser
     public class Parser
     {
         // Regex for a top-level chunk, ignoring nested chunks.
-        private readonly Regex elementRegex = new Regex(@"(\[(\w+?)\s+((?>[^\[\]]+|\[(?<DEPTH>)|\](?<-DEPTH>))*(?(DEPTH)(?!)))\])|((\w+)/(\w+))", RegexOptions.Compiled);
+        private readonly Regex elementRegex = new Regex(@"(\[(\w+?)\s+((?>[^\[\]]+|\[(?<DEPTH>)|\](?<-DEPTH>))*(?(DEPTH)(?!)))\])|((\w+)/(\w+))");
 
         /// <summary>
         /// Returns a tree structure from the supplied POS chunked text
