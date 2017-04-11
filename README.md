@@ -1,8 +1,8 @@
-#POS chunker
+# POS chunker
 
 A C# library for chunking POS-tagged text such as that output by the Stanford POS tagger: http://sergey-tihon.github.io/Stanford.NLP.NET/StanfordPOSTagger.html
 
-##Example usage:
+## Example usage:
 
 ```
 
@@ -41,7 +41,7 @@ For example, "{NP} {VP}" above translates to "a noun phrase (NP) chunk followed 
 Any brackets in the original text are expected to have been escaped by the previous POS tagging step. 
 
 
-##Chunk parser
+## Chunk parser
 
 Also included is a parser which takes the chunked output and produces a tree structure for easier analysis of the sentence(s). An example from the unit tests:
 
@@ -81,7 +81,7 @@ Assert.IsNull(professorTagBranch.Children);
 ```
 
 
-##Inspiration
+## Inspiration
 
 This library was inspired by Mark Birbeck's POS chunker for Node.js:
 
